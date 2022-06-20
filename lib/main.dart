@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:authenticationfirebase/authentication/routeAuth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 //import 'package:authenticationfirebase/utils/utils.dart';
 
 Future<void> main() async {
@@ -27,7 +30,6 @@ class MyApp extends StatelessWidget {
                   primarySwatch: Colors.blueGrey, brightness: Brightness.dark)
               .copyWith(secondary: Colors.greenAccent),
         ),
-        title: "ToDo App",
         //
         home: RouteAuth(),
       ),

@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:authenticationfirebase/authentication/signupScreen.dart';
 import 'package:authenticationfirebase/homepageScreens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:authenticationfirebase/authentication/loginScreen.dart';
-import 'package:authenticationfirebase/authentication/signupScreen.dart';
+import 'package:authenticationfirebase/authentication/verifyEmailPage.dart';
 
 class RouteAuth extends StatefulWidget {
   //Optional
@@ -115,7 +116,16 @@ class _RouteAuthState extends State<RouteAuth> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SignupPage(),
+                    builder: (context) => StreamBuilder<User?>(
+                      stream: FirebaseAuth.instance.authStateChanges(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return VerifyEmailPage();
+                        } else {
+                          return SignupPage();
+                        }
+                      },
+                    ),
                   ),
                 );
               },
