@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
 
@@ -16,6 +16,8 @@ class VerifyEmailPage extends StatefulWidget {
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
   //Creating boolean for email verification checking
   bool isEmailVerified = false;
+  //setting up variable for email resend availability
+  bool canResendEmail = false;
   //Setting timer variable for timer checking
   Timer? timer;
 
@@ -64,6 +66,31 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   }
 
   //
+  //Resending Verification Email -assurance for emails not being sent-
+  Future resendVerificationEmail() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser!;
+      await user.sendEmailVerification();
+
+      //Setting resend button false for it not being spammed -5 second delay-
+      /*
+      setState(() => canResendEmail = false);
+      await Future.delayed(Duration(seconds: 5));
+      setState(() => canResendEmail = true);
+      */
+      //
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          backgroundColor: Colors.red.shade400,
+        ),
+      );
+    }
+  }
+  //
+
+  //
   //ASYNC method for sending verification email
   Future sendVerificationEmail() async {
     try {
@@ -88,8 +115,41 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   Widget build(BuildContext context) => isEmailVerified
       ? HomePage()
       : Scaffold(
-          appBar: AppBar(
-            title: Text("Verify Email"),
+          body: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "A verification email has been sent to you inbox.",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 24),
+                ElevatedButton.icon(
+                  onPressed:
+                      resendVerificationEmail, //canResendEmail ? resendVerificationEmail : null,
+                  icon: Icon(Icons.email_outlined),
+                  label: Text(
+                    "Resend Email",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                SizedBox(height: 0),
+                TextButton(
+                  onPressed: () => FirebaseAuth.instance.signOut(),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size.fromHeight(20),
+                  ),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
 }
