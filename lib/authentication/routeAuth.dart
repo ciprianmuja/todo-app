@@ -27,20 +27,20 @@ class _RouteAuthState extends State<RouteAuth> {
           children: const <Widget>[
             Positioned(
               bottom: 420,
-              left: 135,
+              left: 105,
               child: Icon(
                 Icons.calendar_month,
-                size: 150,
+                size: 200,
                 color: Colors.greenAccent,
               ),
             ),
             Positioned(
               bottom: 370,
-              left: 50,
+              left: 10,
               child: Text(
                 "Welcome to krakenchys ToDoApp!",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 23,
                     fontFamily: "Georgia",
                     fontWeight: FontWeight.bold),
               ),
@@ -56,7 +56,7 @@ class _RouteAuthState extends State<RouteAuth> {
         children: <Widget>[
           //Creating SignIn button with icon and text
           Positioned(
-            left: 150,
+            left: 137,
             bottom: 250,
             //Extending FloatingActionButton so it has room for labels
             child: FloatingActionButton.extended(
@@ -98,7 +98,7 @@ class _RouteAuthState extends State<RouteAuth> {
               label: const Text(
                 "SignIn",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -136,7 +136,7 @@ class _RouteAuthState extends State<RouteAuth> {
               label: const Text(
                 "SignUp",
                 style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
