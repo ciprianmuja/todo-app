@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:authenticationfirebase/authentication/routeAuth.dart';
+import 'routeAuth.dart';
 import 'package:email_validator/email_validator.dart';
 
 //This is the UI for the SignUp page

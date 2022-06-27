@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:authenticationfirebase/authentication/signupScreen.dart';
-import 'package:authenticationfirebase/homepageScreen/HomePage.dart';
+import 'signupScreen.dart';
+import '/homepageScreen/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:authenticationfirebase/authentication/loginScreen.dart';
-import 'package:authenticationfirebase/authentication/verifyEmailPage.dart';
+import 'loginScreen.dart';
+import 'verifyEmailPage.dart';
 
 class RouteAuth extends StatefulWidget {
   //Optional

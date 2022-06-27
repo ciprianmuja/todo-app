@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:authenticationfirebase/authentication/routeAuth.dart';
+import '/authentication/routeAuth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 //import 'package:authenticationfirebase/utils/utils.dart';

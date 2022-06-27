@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:authenticationfirebase/authentication/routeAuth.dart';
-import 'package:authenticationfirebase/authentication/forgotPasswordPage.dart';
+import 'routeAuth.dart';
+import 'forgotPasswordPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 //This is the ui for the login page
