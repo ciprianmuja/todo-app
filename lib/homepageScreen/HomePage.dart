@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
             bottom: 550,
             left: 30,
             child: FloatingActionButton.extended(
+              heroTag: "BackButton",
               onPressed: (() {
                 Navigator.of(context).pop(RouteAuth());
               }),
@@ -51,6 +52,7 @@ class _HomePageState extends State<HomePage> {
             bottom: 550,
             left: 250,
             child: FloatingActionButton.extended(
+              heroTag: "SignOutRoute",
               //Signing out
               onPressed: (() => FirebaseAuth.instance.signOut()),
               icon: const Icon(
@@ -79,20 +81,17 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 450, left: 142, right: 130),
+        padding: EdgeInsets.only(top: 475, left: 142, right: 130),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //Creating ToDo button to route to todoPage
             FloatingActionButton.extended(
+              heroTag: "ToDoRoute",
               //Create route to ToDo page
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TodoScreen(),
-                  ),
-                );
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => TodoScreen()));
               },
               label: Text(
                 "ToDo",
@@ -107,6 +106,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 25),
             //Creating Done button to route to donePage
             FloatingActionButton.extended(
+              heroTag: "DoneRoute",
               //Create route to done page
               onPressed: () {
                 Navigator.push(

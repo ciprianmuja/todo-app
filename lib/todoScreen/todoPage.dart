@@ -1,21 +1,96 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:authenticationfirebase/notePage/noteScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+//Creating todo class to determine what variables go into list
+class Todo {
+  Todo({required this.name, required this.checked});
+  final String name;
+  bool checked;
+}
+
+//
 class TodoScreen extends StatefulWidget {
-  const TodoScreen({Key? key}) : super(key: key);
+  TodoScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TodoScreen> createState() => _TodoScreenState();
+  _TodoScreenState createState() => _TodoScreenState();
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  final List _tasks = [];
-  final List _savedTasks = [];
+  //
+  //Creating controller for the text field
+  final TextEditingController _textFieldController = TextEditingController();
+  //
+  //List to hold the name and checked data
+  final List<Todo> _todos = <Todo>[];
+  //
+  //Adding name and checked to list
+  void _addTodoItem(String name) {
+    setState(() {
+      _todos.add(Todo(name: name, checked: false));
+    });
+    _textFieldController.clear();
+  }
+
+  //
+
+  //
+  //Creating a pop up with a text form field to enter tasks
+  Future<void> _displayDialog() async {
+    //showing dialog
+    return showDialog(
+      context: context,
+      //Barrier not being able to close with outside touch
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            "Add a new todo item",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          //Creating TextField to get user input (could set it up with text field validation)
+          content: TextField(
+            controller: _textFieldController,
+            decoration: const InputDecoration(
+                hintText: "Type your new todo",
+                hintStyle: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+          //Popping the dialog and adding data to list
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _addTodoItem(_textFieldController.text);
+              },
+              child: const Text(
+                "Add",
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  //
+  //Handle the state of checking
+  void _handleTodoChange(Todo todo) {
+    setState(() {
+      todo.checked = !todo.checked;
+    });
+  }
+  //
 
   @override
   Widget build(BuildContext context) {
+    //
     return Scaffold(
       //Creating appBar for page with title and back button
       appBar: AppBar(
@@ -39,60 +114,72 @@ class _TodoScreenState extends State<TodoScreen> {
           ),
         ),
       ),
-      //
-      //Creating button for adding tasks
+
+      //Create body for showing tasks
+      body: ListView(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        children: _todos.map((Todo todo) {
+          return TodoItem(
+            todo: todo,
+            onTodoChanged: _handleTodoChange,
+          );
+        }).toList(),
+      ),
+      //Button for adding task
       floatingActionButton: FloatingActionButton(
+        onPressed: () => _displayDialog(),
+        tooltip: "Add Item",
         child: Icon(
           Icons.add,
-          size: 30,
           color: Colors.white,
+          size: 30,
         ),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => NoteScreen()));
-        },
       ),
-      //Create body for adding tasks
-      body: Column(), //_buildtasks(),
+    );
+  }
+}
+
+class TodoItem extends StatelessWidget {
+  //Constructor
+  TodoItem({required this.todo, required this.onTodoChanged})
+      : super(key: ObjectKey(todo));
+  //Initialize
+  final Todo todo;
+  //
+
+  //Is tied with the TextStyle from under
+  //Text stle of the tasks -if pressed line through it if not leave it like that-
+  final onTodoChanged;
+  TextStyle? _getTextStyle(bool checked) {
+    //If checked is false return null
+    if (!checked) return null;
+
+    return TextStyle(
+      color: Colors.greenAccent,
+      decoration: TextDecoration.lineThrough,
     );
   }
 
-  //Building the tasks
-  //Create it so that it matches what I want to make
-  /*Widget _buildtasks() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemBuilder: (context, item) {
-        if (item.isOdd) return Divider();
-        final index = item ~/ 2;
-        return _buildRow(_tasks[index]);
-      },
-    );
-  }
-  */
-
-  //Same thing as above
-  /*Widget _buildRow(task) {
-    final alreadySaved = _tasks.contains(task);
+  @override
+  //Setting up tile content
+  Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        "Task",
-        style: TextStyle(fontSize: 18),
-      ),
-      trailing: Icon(
-        alreadySaved ? Icons.delete : Icons.delete_outline,
-        color: alreadySaved ? Colors.red : null,
-      ),
+      contentPadding: EdgeInsets.only(top: 20, bottom: 20, right: 30, left: 30),
+      //Change checked state when tapped
       onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _savedTasks.remove(task);
-          } else {
-            _savedTasks.add(task);
-          }
-        });
+        onTodoChanged(todo);
       },
+      //Leading icon for looks
+      leading: Icon(Icons.circle),
+      //Setting up the title so that it shows the name of the to do and the style to update the state
+      title: Text(
+        todo.name,
+        style: _getTextStyle(todo.checked),
+      ),
+      //Setting gap between leading, trailing and title
+      horizontalTitleGap: 5,
+      //Trailing icon for looks as well lol xD
+      trailing: Icon(Icons.hourglass_empty),
     );
   }
-  */
 }

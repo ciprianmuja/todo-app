@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:authenticationfirebase/authentication/signupScreen.dart';
-import 'package:authenticationfirebase/homepageScreens/HomePage.dart';
+import 'package:authenticationfirebase/homepageScreen/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:authenticationfirebase/authentication/loginScreen.dart';
@@ -24,18 +24,18 @@ class _RouteAuthState extends State<RouteAuth> {
         //Setting up everything in a Stack-like shape
         child: Stack(
           fit: StackFit.expand,
-          children: const <Widget>[
+          children: const [
             Positioned(
-              bottom: 420,
-              left: 105,
+              bottom: 375,
+              left: 70,
               child: Icon(
                 Icons.calendar_month,
-                size: 200,
+                size: 280,
                 color: Colors.greenAccent,
               ),
             ),
             Positioned(
-              bottom: 370,
+              bottom: 325,
               left: 10,
               child: Text(
                 "Welcome to krakenchys ToDoApp!",
@@ -57,9 +57,10 @@ class _RouteAuthState extends State<RouteAuth> {
           //Creating SignIn button with icon and text
           Positioned(
             left: 137,
-            bottom: 250,
+            bottom: 200,
             //Extending FloatingActionButton so it has room for labels
             child: FloatingActionButton.extended(
+              heroTag: "SignInRoute",
               //
               //Routing to SignIn Screen
               onPressed: () {
@@ -108,9 +109,10 @@ class _RouteAuthState extends State<RouteAuth> {
           //Creating the SignUp button with icon and text
           Positioned(
             right: 136,
-            bottom: 175,
+            bottom: 125,
             //Extending FloatingActionButton so it has room for labels
             child: FloatingActionButton.extended(
+              heroTag: "SignUpRoute",
               //routing to SignUp Screen
               onPressed: () {
                 Navigator.push(

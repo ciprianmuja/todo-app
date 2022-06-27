@@ -21,18 +21,16 @@ final navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: MaterialApp(
-        //navigatorKey: Utils.messengerKey,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(
-                  primarySwatch: Colors.blueGrey, brightness: Brightness.dark)
-              .copyWith(secondary: Colors.greenAccent),
-        ),
-        //
-        home: RouteAuth(),
+    return MaterialApp(
+      //navigatorKey: Utils.messengerKey,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.blueGrey, brightness: Brightness.dark)
+            .copyWith(secondary: Colors.greenAccent),
       ),
+      //
+      home: RouteAuth(),
     );
   }
 }
