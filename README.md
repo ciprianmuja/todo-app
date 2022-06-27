@@ -1,16 +1,22 @@
 # todo-app
 
-A new Flutter project.
+This is my try of a ToDo-App in Flutter
 
-## Getting Started
+## App Photos
 
-This project is a starting point for a Flutter application.
+TODO-APP
 
-A few resources to get you started if this is your first Flutter project:
+# AUTH-PAGE
+![Auth](https://user-images.githubusercontent.com/64733068/176018253-ff78ea6c-7196-45d5-a732-3e98679089e5.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# SIGN-IN(SignUp looks kind of the same)
+![SignIn](https://user-images.githubusercontent.com/64733068/176018703-79cb1b81-7462-4b41-a971-4a26fc531df5.png) 
+
+
+# HOME-PAGE
+![HomePage](https://user-images.githubusercontent.com/64733068/176019014-3f684c0f-ed2b-4552-aeb4-5ba5b6a4b988.png)
+
+
+# TODO-LIST/TASK-ADD
+![ToDoList](https://user-images.githubusercontent.com/64733068/176019135-84fe4753-24be-4564-acd9-a23fdb9c276f.png) ![ToDoTaskAdd](https://user-images.githubusercontent.com/64733068/176019065-90b04102-6f02-4086-9845-81c0e3465a95.png)
